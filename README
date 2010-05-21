@@ -4,19 +4,25 @@ WP-SILCC v1.0
 
 wp-silcc auto-generates tags for blog content.  It uses the OpenSiLCC (http://opensilcc.com) API from SwiftRiver (http://swift.ushahidi.com).  wp-silcc differs from similar auto-tagging plugins because it utilizes active learning techniques to improve it's tagging ability over time.  For more on OpenSiLCC please visit the documentation page here - http://swift.ushahidi.com/doc/doku.php?id=silcc
 
+If you are a developer interested in improving this code use the following links.
+
+Source Code - http://github.com/ushahidi/wp-silcc
+Issue Tracker - http://github.com/ushahidi/wp-silcc/issues
+
 ======================
 PROJECT CONTRIBUTORS
 ======================
 
-Ivan Kavuma (Developer wp-SiLCC)
+Ivan Kavuma (wp-silcc Developer) - kavuma.ivan@appfrica.org
 
-Neville Newey (Developer SiLCC)
-Jon Gosier (SwiftRiver)
-Matthew Griffiths (SwiftRiver)
+Neville Newey
+Jon Gosier
+Matthew Griffiths
 
 ====================
 SYSTEM REQUIREMENTS
 ====================
+
 Requires Wordpress Version 2.0
 Tested up to Version 1.0
 
@@ -30,3 +36,9 @@ INSTALLATION
 	4. Activate the plugin from the Wordpress admin panel
 	5. Enter your SiLCC API key
 	6. 1, 2, 3: You're done!
+
+====================
+CONTACT
+====================
+
+jon@ushahidi.com
