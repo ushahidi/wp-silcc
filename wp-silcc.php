@@ -1,14 +1,14 @@
 <?php
 /*
 Plugin Name: WP-SiLCC
-Plugin URI: http://swiftly.org
-Description: SiLCC auto-generates tags for blogs. You no longer need an API key to use it.
-Version: 1.6
-Author: Ivan Kavuma, Ahmed Maawy
+Plugin URI: http://swift.ushahidi.com/
+Description: SiLCC auto-generates tags for blogs. You need an <a href="http://opensilcc.com/">OpenSiLCC API key</a> to use it. 
+Version: 1.0
+Author: Ivan Kavuma
 Author URI: http://opensilcc.com/
 */
 
-define('SILCC_VERSION', '1.6.1');
+define('SILCC_VERSION', '1.0.0');
 
 define('SILCC_API_KEY','IVANALPHA');
 
@@ -159,21 +159,26 @@ function silcc_submit_post( $post_id ) {
 
     $tags = array();
 
-    if(strlen($text_content) > 240) {
-        $tags = tagthe_http_get($text_content);
-    } else {
-        $query_string = ''.urlencode($text_content) . '&';
+    if(!is_null($text_content)) {
+        if(strlen($text_content) > 240) {
+            $tags = tagthe_http_get($text_content);
+        }
+        else if((strlen($text_content) > 0 && (strlen($text_content)) < 240)) {
+            $query_string = ''.urlencode($text_content) . '&';
 
-        $response = silcc_http_get($query_string);
-        $clean_response = str_replace('[','',$response);
-        $clean_response = str_replace(']','',$clean_response);
-        $clean_response = str_replace(' ','',$clean_response);
-        $clean_response = str_replace('"','',$clean_response);
-        $tags = explode(',',$clean_response);
+            $response = silcc_http_get($query_string);
+            $clean_response = str_replace('[','',$response);
+            $clean_response = str_replace(']','',$clean_response);
+            $clean_response = str_replace(' ','',$clean_response);
+            $clean_response = str_replace('"','',$clean_response);
+            $tags = explode(',',$clean_response);
+        }
     }
     
     wp_set_post_terms($post_id, $tags);
-    silcc_update_options(count($tags));
+
+    if(count($tags) > 0)
+        silcc_update_options(count($tags));
 }
 //add_action('admin_footer', 'silcc_submit_posts'); //This function can be called if one whats to tag everything.
 add_action ( 'publish_post', 'silcc_submit_post');
